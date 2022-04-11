@@ -29,8 +29,12 @@ export default function Table(props: TableProps) {
 
     return (
         <table>
-            {renderHeader()}
-            {renderData()}
+            <thead>
+                {renderHeader()}
+            </thead>
+            <tbody>
+                {renderData()}
+            </tbody>
         </table>
     )
 }
