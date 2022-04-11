@@ -11,6 +11,10 @@ export default function Home() {
     new Client('Isa', 37, '5')
   ]
 
+  function selectClient(client: Client) {
+
+  }
+
   return (
     <div className={`
       flex justify-center items-center h-screen
@@ -18,7 +22,7 @@ export default function Home() {
       text-white
     `}>
       <Layout title="Title">
-        <Table clients={clients}></Table>
+        <Table clients={clients} selectClient={selectClient}></Table>
       </Layout>
     </div>
   )

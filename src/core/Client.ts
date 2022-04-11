@@ -1,5 +1,3 @@
-import { throws } from "assert"
-
 export default class Client {
     private _id: string
     private _name: string
