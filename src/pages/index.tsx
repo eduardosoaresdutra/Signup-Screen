@@ -1,3 +1,4 @@
+import Button from "../components/Button";
 import Layout from "../components/Layout";
 import Table from "../components/Table";
 import Client from "../core/Client";
@@ -12,7 +13,11 @@ export default function Home() {
   ]
 
   function selectClient(client: Client) {
+    console.log(client.name)
+  }
 
+  function deleteClient(client: Client) {
+    console.log(`Deleting ${client.name}...`)
   }
 
   return (
@@ -22,7 +27,8 @@ export default function Home() {
       text-white
     `}>
       <Layout title="Title">
-        <Table clients={clients} selectClient={selectClient}></Table>
+        <Button>New Client</Button>
+        <Table clients={clients} selectClient={selectClient} deleteClient={deleteClient}></Table>
       </Layout>
     </div>
   )

@@ -39,7 +39,7 @@ export default function Table(props: TableProps) {
         return (
             <div>
                 {props.selectClient ? (
-                    <button className={`
+                    <button onClick={() => props.selectClient?.(client)} className={`
                     text-green-600 rounded-full p-2 m-1
                     hover:bg-purple-50
                     `}>
@@ -47,7 +47,7 @@ export default function Table(props: TableProps) {
                     </button>
                 ) : false}
                 {props.deleteClient ? (
-                    <button className={`
+                    <button onClick={() => props.deleteClient?.(client)} className={`
                     text-red-500 rounded-full p-2 m-1
                     hover:bg-purple-50
                     `}>
