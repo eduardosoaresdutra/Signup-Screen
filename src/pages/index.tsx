@@ -1,4 +1,5 @@
 import Button from "../components/Button";
+import Form from "../components/Form";
 import Layout from "../components/Layout";
 import Table from "../components/Table";
 import Client from "../core/Client";
@@ -26,11 +27,12 @@ export default function Home() {
       bg-gradient-to-r from-blue-500 to-purple-500
       text-white
     `}>
-      <Layout title="Title">
+      <Layout title="Sign Up">
         <div className="flex justify-end">
           <Button color="green" className="mb-4">New Client</Button>
         </div>
-        <Table clients={clients} selectClient={selectClient} deleteClient={deleteClient}></Table>
+        {/* <Table clients={clients} selectClient={selectClient} deleteClient={deleteClient}></Table> */}
+        <Form />
       </Layout>
     </div>
   )
