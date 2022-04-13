@@ -27,7 +27,9 @@ export default function Home() {
       text-white
     `}>
       <Layout title="Title">
-        <Button>New Client</Button>
+        <div className="flex justify-end">
+          <Button color="green" className="mb-4">New Client</Button>
+        </div>
         <Table clients={clients} selectClient={selectClient} deleteClient={deleteClient}></Table>
       </Layout>
     </div>
