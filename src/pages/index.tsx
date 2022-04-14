@@ -31,8 +31,12 @@ export default function Home() {
         <div className="flex justify-end">
           <Button color="green" className="mb-4">New Client</Button>
         </div>
-        {/* <Table clients={clients} selectClient={selectClient} deleteClient={deleteClient}></Table> */}
-        <Form />
+        <Table
+          clients={clients}
+          selectClient={selectClient}
+          deleteClient={deleteClient}
+        />
+        <Form client={clients[0]} />
       </Layout>
     </div>
   )
