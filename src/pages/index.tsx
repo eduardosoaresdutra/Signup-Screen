@@ -14,9 +14,12 @@ export default function Home() {
     new Client('Isa', 37, '5')
   ]
 
+  const [client, setClient] = useState<Client>(Client.empty())
   const [viewMode, setViewMode] = useState<'form' | 'table'>('table')
 
   function selectClient(client: Client) {
+    setClient(client)
+    setViewMode('form')
     console.log(client.name)
   }
 
@@ -27,6 +30,11 @@ export default function Home() {
   function saveClient(client: Client) {
     setViewMode('table')
     console.log(client)
+  }
+
+  function newClient() {
+    setClient(Client.empty)
+    setViewMode('form')
   }
 
   return (
@@ -40,7 +48,7 @@ export default function Home() {
           <>
             <div className="flex justify-end">
               <Button
-                onClick={() => setViewMode('form')}
+                onClick={() => newClient()}
                 color="green"
                 className="mb-4"
               >
@@ -55,7 +63,7 @@ export default function Home() {
           </>
         ) : (
           <Form
-            client={clients[0]}
+            client={client}
             onClientChange={saveClient}
             onCancel={() => setViewMode('table')}
           />
