@@ -1,7 +1,7 @@
 interface ButtonProps {
     color?: 'green' | 'blue' | 'gray'
     className?: string
-    onClick: (value?: any) => void
+    onClick: () => void
     children: React.ReactNode
 }
 

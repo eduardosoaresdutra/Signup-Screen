@@ -16,16 +16,17 @@ export default function Home() {
 
   const [viewMode, setViewMode] = useState<'form' | 'table'>('table')
 
-  function toggleViewMode() {
-    viewMode === 'table' ? setViewMode('form') : setViewMode('table')
-  }
-
   function selectClient(client: Client) {
     console.log(client.name)
   }
 
   function deleteClient(client: Client) {
     console.log(`Deleting ${client.name}...`)
+  }
+
+  function saveClient(client: Client) {
+    setViewMode('table')
+    console.log(client)
   }
 
   return (
@@ -39,7 +40,7 @@ export default function Home() {
           <>
             <div className="flex justify-end">
               <Button
-                onClick={toggleViewMode}
+                onClick={() => setViewMode('form')}
                 color="green"
                 className="mb-4"
               >
@@ -53,7 +54,11 @@ export default function Home() {
             />
           </>
         ) : (
-          <Form client={clients[0]} />
+          <Form
+            client={clients[0]}
+            onClientChange={saveClient}
+            onCancel={() => setViewMode('table')}
+          />
         )}
       </Layout>
     </div>
