@@ -1,48 +1,21 @@
-import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import Layout from "../components/Layout";
 import Table from "../components/Table";
-import Client from "../core/Client";
-import ClientRepository from "../core/ClientRepository";
-import ClientCollection from "../backend/db/ClientCollection";
+import useClients from "../hooks/useClients";
 
 export default function Home() {
 
-  const repo: ClientRepository = new ClientCollection()
-
-  const [client, setClient] = useState<Client>(Client.empty())
-  const [clients, setClients] = useState<Client[]>([])
-  const [viewMode, setViewMode] = useState<'form' | 'table'>('table')
-
-  useEffect(getAll, [])
-
-  function getAll() {
-    repo.getAll().then(clients => {
-      setClients(clients)
-      setViewMode('table')
-    })
-  }
-
-  function selectClient(client: Client) {
-    setClient(client)
-    setViewMode('form')
-  }
-
-  async function deleteClient(client: Client) {
-    await repo.delete(client)
-    getAll()
-  }
-
-  async function saveClient(client: Client) {
-    await repo.save(client)
-    getAll()
-  }
-
-  function newClient() {
-    setClient(Client.empty)
-    setViewMode('form')
-  }
+  const {
+    client,
+    clients,
+    newClient,
+    saveClient,
+    selectClient,
+    deleteClient,
+    isTableMode,
+    setTableMode
+  } = useClients()
 
   return (
     <div className={`
@@ -51,7 +24,7 @@ export default function Home() {
       text-white
     `}>
       <Layout title="Sign Up">
-        {viewMode === 'table' ? (
+        {isTableMode ? (
           <>
             <div className="flex justify-end">
               <Button
@@ -72,7 +45,7 @@ export default function Home() {
           <Form
             client={client}
             onClientChange={saveClient}
-            onCancel={() => setViewMode('table')}
+            onCancel={() => setTableMode()}
           />
         )}
       </Layout>
