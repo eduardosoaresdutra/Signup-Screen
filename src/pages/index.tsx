@@ -1,35 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import Layout from "../components/Layout";
 import Table from "../components/Table";
 import Client from "../core/Client";
+import ClientRepository from "../core/ClientRepository";
+import ClientCollection from "../backend/db/ClientCollection";
 
 export default function Home() {
-  const clients = [
-    new Client('Ana', 20, '1'),
-    new Client('Bia', 25, '2'),
-    new Client('Edu', 23, '3'),
-    new Client('Lara', 30, '4'),
-    new Client('Isa', 37, '5')
-  ]
+
+  const repo: ClientRepository = new ClientCollection()
 
   const [client, setClient] = useState<Client>(Client.empty())
+  const [clients, setClients] = useState<Client[]>([])
   const [viewMode, setViewMode] = useState<'form' | 'table'>('table')
+
+  useEffect(getAll, [])
+
+  function getAll() {
+    repo.getAll().then(clients => {
+      setClients(clients)
+      setViewMode('table')
+    })
+  }
 
   function selectClient(client: Client) {
     setClient(client)
     setViewMode('form')
-    console.log(client.name)
   }
 
-  function deleteClient(client: Client) {
-    console.log(`Deleting ${client.name}...`)
+  async function deleteClient(client: Client) {
+    await repo.delete(client)
+    getAll()
   }
 
-  function saveClient(client: Client) {
-    setViewMode('table')
-    console.log(client)
+  async function saveClient(client: Client) {
+    await repo.save(client)
+    getAll()
   }
 
   function newClient() {
